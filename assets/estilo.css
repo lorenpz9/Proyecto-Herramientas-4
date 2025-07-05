@@ -1,10 +1,13 @@
+/* === Fondo y fuente global === */
 body {
-  background: #f8d7da; /* rojo suave */
+  background: #f8d7da;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  color: #5c1218;
 }
 
+/* === Sección principal hero === */
 .hero {
   text-align: center;
   padding: 60px 30px;
@@ -13,8 +16,10 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   width: 100%;
+  margin: 0 auto;
 }
 
+/* === Títulos === */
 h1 {
   color: #842029;
   font-weight: 700;
@@ -23,74 +28,61 @@ h1 {
 
 p {
   font-size: 1.2rem;
-  color: #5c1218;
 }
 
-.btn-custom {
-  background-color: #a94442;
-  color: #fff;
-  border: none;
+/* === Estilo base para todos los botones === */
+button,
+input[type="submit"],
+.btn,
+a.btn,
+a.btn-link {
+  font-weight: 500;
+  border-radius: 30px;
   padding: 12px 25px;
-  font-weight: 500;
-  border-radius: 30px;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.btn-custom:hover {
+/* === Botón relleno (rojo oscuro) === */
+.btn-custom,
+.btn-rojizo,
+button,
+input[type="submit"] {
+  background-color: #a94442;
+  color: #fff;
+  border: none;
+}
+
+.btn-custom:hover,
+.btn-rojizo:hover,
+button:hover,
+input[type="submit"]:hover {
   background-color: #843534;
   color: #fff;
 }
 
-.btn:focus {
-  box-shadow: none;
-}
-.bg-pastel {
-  background-color: #f8d7da;
-}
-
-.login-box {
-  background: linear-gradient(135deg, #f5c2c7, #e99b9f);
-  max-width: 400px;
-  width: 100%;
-}
-
-.text-rojizo {
-  color: #842029;
-}
-
-.btn-rojizo {
-  background-color: #a94442;
-  color: #fff;
-  border: none;
-  font-weight: 500;
-  border-radius: 30px;
-  padding: 12px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-}
-
+/* === Botón bordeado === */
 .btn-outline-rojizo {
   background-color: transparent;
   color: #a94442;
   border: 2px solid #a94442;
-  font-weight: 500;
-  border-radius: 30px;
-  padding: 12px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
 }
 
-.btn-rojizo:hover,
 .btn-outline-rojizo:hover {
-  color: #fff;
   background-color: #843534;
-  text-decoration: none;
+  color: #fff;
 }
 
+/* === Línea animada inferior === */
+.btn-custom::after,
 .btn-rojizo::after,
-.btn-outline-rojizo::after {
+.btn-outline-rojizo::after,
+button::after,
+input[type="submit"]::after,
+a.btn-link::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -101,78 +93,58 @@ p {
   transition: width 0.3s ease, left 0.3s ease;
 }
 
-.btn-outline-rojizo::after {
+.btn-outline-rojizo::after,
+a.btn-link::after {
   background-color: #a94442;
 }
 
+.btn-custom:hover::after,
 .btn-rojizo:hover::after,
-.btn-outline-rojizo:hover::after {
+.btn-outline-rojizo:hover::after,
+button:hover::after,
+input[type="submit"]:hover::after,
+a.btn-link:hover::after {
   width: 60%;
   left: 20%;
 }
-.bg-pastel {
-  background-color: #f8d7da;
-}
 
-.login-box {
+/* === Formularios centrados === */
+form {
   background: linear-gradient(135deg, #f5c2c7, #e99b9f);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 100%;
+  margin: 0 auto;
 }
 
+/* === Etiquetas de formulario === */
+label {
+  font-weight: bold;
+  color: #842029;
+}
+
+/* === Inputs y selects === */
+input,
+select {
+  border: 1px solid #dca9a9;
+  border-radius: 8px;
+}
+
+/* === Texto color vino === */
 .text-rojizo {
   color: #842029;
 }
 
-.btn-rojizo {
-  background-color: #a94442;
-  color: #fff;
-  border: none;
-  font-weight: 500;
-  border-radius: 30px;
-  padding: 12px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
+/* === Fondo pastel adicional (si lo usas) === */
+.bg-pastel {
+  background-color: #f8d7da;
 }
 
-.btn-outline-rojizo {
-  background-color: transparent;
-  color: #a94442;
-  border: 2px solid #a94442;
-  font-weight: 500;
-  border-radius: 30px;
-  padding: 12px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-rojizo:hover,
-.btn-outline-rojizo:hover {
-  color: #fff;
-  background-color: #843534;
-  text-decoration: none;
-}
-
-.btn-rojizo::after,
-.btn-outline-rojizo::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 8px;
-  width: 0;
-  height: 2px;
-  background-color: #fff;
-  transition: width 0.3s ease, left 0.3s ease;
-}
-
-.btn-outline-rojizo::after {
-  background-color: #a94442;
-}
-
-.btn-rojizo:hover::after,
-.btn-outline-rojizo:hover::after {
-  width: 60%;
-  left: 20%;
+/* === Evitar que el chatbot interfiera con el layout === */
+iframe.landbot-iframe {
+  z-index: 9999 !important;
+  position: fixed !important;
+  bottom: 0;
+  right: 0;
 }

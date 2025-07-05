@@ -1,88 +1,67 @@
 <?php
 require_once '../config.php';
-
-$error = '';
-$success = '';
-
-// Obtener roles de la base de datos para mostrar en el select
-$stmtRoles = $pdo->query("SELECT id, nombre FROM roles");
-$roles = $stmtRoles->fetchAll(PDO::FETCH_ASSOC);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = trim($_POST['nombre'] ?? '');
-    $correo = trim($_POST['correo'] ?? '');
-    $contraseña = $_POST['contraseña'] ?? '';
-    $rol_id = $_POST['rol'] ?? '';
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $contraseña = password_hash($_POST['contraseña'], PASSWORD_DEFAULT);
+    $rol_id = $_POST['rol'];
 
-    // Validaciones
-    if ($nombre === '') {
-        $error = "El nombre es obligatorio.";
-    } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $error = "Por favor, ingresa un correo válido.";
-    } elseif (strlen($contraseña) < 8) {
-        $error = "La contraseña debe tener al menos 8 caracteres.";
-    } elseif (!in_array($rol_id, array_column($roles, 'id'))) {
-        $error = "Selecciona un rol válido.";
-    } else {
-        // Insertar usuario
-        $hashed = password_hash($contraseña, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, correo, contraseña, rol_id) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$nombre, $correo, $hashed, $rol_id]);
-        $success = "Registro exitoso. <a href='login.php'>Iniciar sesión</a>";
-    }
+    $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, correo, contraseña, rol_id) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$nombre, $correo, $contraseña, $rol_id]);
+    echo "<div class='alert alert-success text-center mt-3'>Registro exitoso. <a href='login.php'>Iniciar sesión</a></div>";
+    exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Registro de Usuario</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/estilo.css">
-</head>
-<body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../assets/estilo.css">
 
-<div class="d-flex justify-content-center align-items-center min-vh-100 bg-pastel">
-  <div class="login-box shadow p-5 rounded-4">
-    <h2 class="text-center mb-4 text-rojizo">Registro de Usuario</h2>
-
-    <?php if ($error): ?>
-      <div class="alert alert-danger text-center"><?= htmlspecialchars($error) ?></div>
-    <?php elseif ($success): ?>
-      <div class="alert alert-success text-center"><?= $success ?></div>
-    <?php endif; ?>
-
-    <form method="POST" novalidate>
-      <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input type="text" name="nombre" class="form-control" required value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Correo</label>
-        <input type="email" name="correo" class="form-control" required value="<?= htmlspecialchars($_POST['correo'] ?? '') ?>">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Contraseña</label>
-        <input type="password" name="contraseña" class="form-control" required minlength="8" title="La contraseña debe tener al menos 8 caracteres">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Rol</label>
-        <select name="rol" class="form-select" required>
-          <option disabled selected>Selecciona un rol</option>
-          <?php foreach ($roles as $rol): ?>
-            <option value="<?= $rol['id'] ?>" <?= (isset($_POST['rol']) && $_POST['rol'] == $rol['id']) ? 'selected' : '' ?>>
-              <?= ucfirst($rol['nombre']) ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-      <div class="d-grid gap-2 mt-4">
-        <button type="submit" class="btn btn-rojizo">Registrarse</button>
-        <a href="../index.php" class="btn btn-outline-rojizo">Regresar al inicio</a>
-      </div>
-    </form>
-  </div>
+<div class="container mt-5 text-center">
+  <h2>Registro de Usuario</h2>
+  <form method="POST" class="mt-4 mx-auto" style="max-width: 450px;">
+    <div class="mb-3 text-start">
+      <label>Nombre</label>
+      <input type="text" name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3 text-start">
+      <label>Correo</label>
+      <input type="email" name="correo" class="form-control" required>
+    </div>
+    <div class="mb-3 text-start">
+      <label>Contraseña</label>
+      <input type="password" name="contraseña" class="form-control" required minlength="8">
+    </div>
+    <div class="mb-3 text-start">
+      <label>Rol</label>
+      <select name="rol" class="form-select" required>
+        <option value="" disabled selected>Seleccione un rol</option>
+        <option value="1">Administrador</option>
+        <option value="2">Docente</option>
+        <option value="3">Estudiante</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-custom me-2">Registrarse</button>
+    <a href="../index.php" class="btn btn-link">Volver al inicio</a>
+  </form>
 </div>
 
-</body>
-</html>
+<!-- Chatbot Landbot -->
+<script>
+window.addEventListener('mouseover', initLandbot, { once: true });
+window.addEventListener('touchstart', initLandbot, { once: true });
+var myLandbot;
+function initLandbot() {
+  if (!myLandbot) {
+    var s = document.createElement('script');
+    s.type = "module";
+    s.async = true;
+    s.addEventListener('load', function () {
+      myLandbot = new Landbot.Livechat({
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2957355-52VTQJ5O5XG386QE/index.json',
+      });
+    });
+    s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  }
+}
+</script>
