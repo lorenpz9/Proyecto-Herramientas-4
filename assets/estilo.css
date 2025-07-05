@@ -1,4 +1,3 @@
-/* === Fondo y fuente global === */
 body {
   background: #f8d7da;
   font-family: 'Segoe UI', sans-serif;
@@ -7,7 +6,6 @@ body {
   color: #5c1218;
 }
 
-/* === Sección principal hero === */
 .hero {
   text-align: center;
   padding: 60px 30px;
@@ -19,7 +17,6 @@ body {
   margin: 0 auto;
 }
 
-/* === Títulos === */
 h1 {
   color: #842029;
   font-weight: 700;
@@ -30,7 +27,6 @@ p {
   font-size: 1.2rem;
 }
 
-/* === Estilo base para todos los botones === */
 button,
 input[type="submit"],
 .btn,
@@ -46,7 +42,6 @@ a.btn-link {
   display: inline-block;
 }
 
-/* === Botón relleno (rojo oscuro) === */
 .btn-custom,
 .btn-rojizo,
 button,
@@ -64,7 +59,6 @@ input[type="submit"]:hover {
   color: #fff;
 }
 
-/* === Botón bordeado === */
 .btn-outline-rojizo {
   background-color: transparent;
   color: #a94442;
@@ -76,7 +70,6 @@ input[type="submit"]:hover {
   color: #fff;
 }
 
-/* === Línea animada inferior === */
 .btn-custom::after,
 .btn-rojizo::after,
 .btn-outline-rojizo::after,
@@ -108,7 +101,6 @@ a.btn-link:hover::after {
   left: 20%;
 }
 
-/* === Formularios centrados === */
 form {
   background: linear-gradient(135deg, #f5c2c7, #e99b9f);
   padding: 2rem;
@@ -118,30 +110,24 @@ form {
   margin: 0 auto;
 }
 
-/* === Etiquetas de formulario === */
 label {
   font-weight: bold;
   color: #842029;
 }
 
-/* === Inputs y selects === */
 input,
 select {
   border: 1px solid #dca9a9;
   border-radius: 8px;
 }
 
-/* === Texto color vino === */
 .text-rojizo {
   color: #842029;
 }
 
-/* === Fondo pastel adicional (si lo usas) === */
 .bg-pastel {
   background-color: #f8d7da;
 }
-
-/* === Evitar que el chatbot interfiera con el layout === */
 iframe.landbot-iframe {
   z-index: 9999 !important;
   position: fixed !important;
