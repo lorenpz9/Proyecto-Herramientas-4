@@ -48,9 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="card shadow-lg">
     <div class="card-body">
+      <div class="mb-3 text-start">
+        <a href="../index.php" class="btn btn-secondary">&larr; Volver al inicio</a>
+      </div>
       <h3 class="text-center mb-4">Iniciar Sesión</h3>
       <?php if (isset($error)): ?>
-        <div class="alert alert-danger text-center"><?= $error ?></div>
+        <div class="alert alert-danger text-center"><?= htmlspecialchars($error) ?></div>
       <?php endif; ?>
       <form method="POST">
         <div class="mb-3">
@@ -71,3 +74,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php include '../includes/chatbot.php'; ?>
 </body>
 </html>
+
